@@ -18,7 +18,8 @@ function import(filename,tablename)
   return tablename
 end
 
-local descriptions = import("descriptions.txt",descriptions)
+local description = import("descriptions.txt",description)
+local pretitle = {"A history of","A Short History of","My work in","The end of","The death of","Dispatches on","A call for","Ten theses on","Women against","Revolutionary action on","Free","I am","Revolt for","Against","Occupy","On","Anti-"}
 local interjections = import("interjections.txt",interjections)
 local words = import("shakespeare_words.txt",words)
 local technology = import("tech.txt",technology)
@@ -41,8 +42,42 @@ function choose(tab)
   return tab[math.random(#tab)]
 end
 
+function introduction()
+  print("# The Library of Sir Herbert Quain")
+  print()
+  print("Programmed, compiled and edited by Lee Tusman.")
+  print()
+  print("*A list of books, pamphlets, zines and assorted publications consisting of rants, screeds, denouncements, manifestos, disagreements, rejoinders and more.*")
+  print()
+  image()
+  print()
+  print("> *It is a laborious madness and an impoverishing one, the madness of composing vast books - setting out in five hundred pages an idea that can be perfectly related orally in five minutes. The better way to go about it is to pretend that those books already exist, and offer a summary, a commentary on them. --Jorge Luis Borges*")
+  print()
+end
+
+function image()
+  print("![](assets/books/"..math.random(0,31)..".jpg)  ")
+  print()
+end
+
 function title()
-  print(up(choose(words)).." "..choose(technology))
+  local t = up(choose(words))
+  if math.random()<0.2 then
+    t = up(choose(pretitle)).." " .. t
+  end
+  if math.random()<0.85 then
+    t = t .. " " ..choose(technology)
+  end
+  print('# ' .. t)
+  print()
+end
+
+function year()
+  if math.random()<0.5 then
+    print(math.random(1987,2023))
+  else
+    print(math.random(1880,2023))
+  end
   print()
 end
 
@@ -62,9 +97,6 @@ function summary()
 end 
 
 function quote()
-  --print(choose(snippet)..":")
-
-  --local intro=choose(snippet)..": \""
   local intro = ""
 
   if math.random()<0.5 then
@@ -82,7 +114,7 @@ function quote()
   if intro ~= "" then
 
     intro = choose(snippet)..": \""..intro .. "\""
-    print(intro)
+    print("> "..intro)
     print()
   end
 end
@@ -91,22 +123,34 @@ function ending()
   print("How it ends: "..choose(mood)..".")
 end
 
+function more()
+  print(up(choose(description)).." and "..choose(description))
+end
+
 function writeReview()
   title()
+  image()
   summary()
-  print(up(choose(interjections))..". A "..choose(mood).." work by the author.")
-  if math.random()<0.3 then
-    print("Recommended.")
-  elseif math.random()<0.5 then
-    print("Not recommended.")
-  else
-    print(math.random(5).." out of 5.")
+
+  local opinion = up(choose(interjections))..". A "..choose(mood).." work by the author."
+
+  if math.random()<0.4 then
+    opinion = opinion .. " " .. up(choose(description)).. "."
   end
+
+  print("*"..opinion.."*")
+
 end
 
 function makeBook()
-  if math.random()<0.5 then
+  if math.random()<0.9 then
     title()
+  end
+
+  image()
+
+  if math.random()<0.8 then
+    year()
   end
 
   if math.random()<0.8 then
@@ -124,6 +168,10 @@ function makeBook()
   if math.random()<0.2 then
     ending()
   end
+
+  if math.random()<0.2 then
+    more()
+  end
 end
 
 function compile()
@@ -132,9 +180,10 @@ function compile()
   else
     writeReview()
   end
-  print("----------------------------")
+  print()
 end
 
-for i=1,5 do
+introduction()
+for i=1,1750 do
   compile()
 end
