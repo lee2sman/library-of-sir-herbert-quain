@@ -22,6 +22,12 @@ Code: ACSL
 
 ## Example output
 
+Large PDFs (1750 pages, about 3MB):
+
+* [entire book PDF](https://github.com/lee2sman/library-of-sir-herbert-quain/blob/main/output/book4.pdf)
+* [an earlier version](https://github.com/lee2sman/library-of-sir-herbert-quain/blob/main/output/book3.pdf)
+* [another earlier version](https://github.com/lee2sman/library-of-sir-herbert-quain/blob/main/output/book2.pdf)
+
 ![cover screenshot](cover.jpg)  
 Cover
 
