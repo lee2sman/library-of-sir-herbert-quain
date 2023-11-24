@@ -28,6 +28,13 @@ Cover
 ![example page](example-page.jpg)  
 Example page output
 
+Images were public domain, no known copyright and creative commons licensed images found through various searches for book covers and pamphlets on flickr.com.
+
+Imagemagick was used in the command line with the following incantation to get the particular aesthetic I settled on:
+
+```
+convert *.jpg -remap pattern:gray50 -density 150 *.jpg
+```
 
 ### To produce a book
 
